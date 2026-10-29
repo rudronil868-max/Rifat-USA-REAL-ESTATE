@@ -1,0 +1,42 @@
+import os
+from fastapi import FastAPI, Request
+import requests
+
+app = FastAPI()
+
+# টেলিগ্রাম বট টোকেন (এনভায়রনমেন্ট ভেরিয়েবল থেকে পড়বে)
+TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "8545909426:AAEyv_JNg36AsU1rE-ea_GuY3tImjuF7FHE")
+TELEGRAM_API_URL = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
+
+@app.get("/")
+def home():
+    return {"status": "Rifat Real Estate Backend is Running!"}
+
+@app.post("/webhook")
+async def receive_update(request: Request):
+    try:
+        data = await request.json()
+        
+        # টেলিগ্রাম থেকে আসা মেসেজ চেক করা
+        if "message" in data:
+            chat_id = data["message"]["chat"]["id"]
+            user_message = data["message"].get("text", "")
+            user_name = data["message"]["from"].get("first_name", "User")
+            
+            # ইউজার কী মেসেজ পাঠাল তা প্রিন্ট করে দেখা (Render Logs-এ দেখা যাবে)
+            print(f"Received message from {user_name}: {user_message}")
+            
+            # ইউজারকে অটো-রিপ্লাই পাঠানোর মেসেজ তৈরি
+            reply_text = f"ধন্যবাদ {user_name}! রিফাত রিয়েল এস্টেট ল্যান্ডিং পেজ থেকে আপনার মেসেজটি আমরা পেয়েছি: '{user_message}'। খুব শীঘ্রই আমাদের একজন প্রতিনিধি আপনার সাথে যোগাযোগ করবেন।"
+            
+            # টেলিগ্রাম এপিআই-এর মাধ্যমে মেসেজ পাঠিয়ে দেওয়া
+            payload = {
+                "chat_id": chat_id,
+                "text": reply_text
+            }
+            requests.post(TELEGRAM_API_URL, json=payload)
+
+        return {"status": "success"}
+    except Exception as e:
+        print(f"Error processing update: {e}")
+        return {"status": "error", "message": str(e)}

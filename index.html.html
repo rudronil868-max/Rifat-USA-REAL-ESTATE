@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Luxury Real Estate | Find Your Dream Home in USA</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #f8f9fa;
+            color: #2b2d42;
+            line-height: 1.6;
+        }
+        /* Navigation Header */
+        header {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+        }
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #0d1b2a;
+            text-decoration: none;
+        }
+        .logo span {
+            color: #2563eb;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            color: #2563eb;
+        }
+        .btn-nav {
+            background: #2563eb;
+            color: #fff !important;
+            padding: 9px 20px;
+            border-radius: 6px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(13, 27, 42, 0.75), rgba(13, 27, 42, 0.75)), 
+                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 650px;
+            color: #e2e8f0;
+        }
+
+        /* Container Section */
+        .section-container {
+            max-width: 1200px;
+            margin: 70px auto;
+            padding: 0 20px;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: #0d1b2a;
+        }
+        .section-title p {
+            color: #6b7280;
+        }
+
+        /* Featured Listings Section */
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .card-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 22px;
+        }
+        .price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 8px;
+        }
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .address {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        .features {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #edf2f7;
+            padding-top: 15px;
+            font-size: 0.85rem;
+            color: #4b5563;
+        }
+
+        /* About Section */
+        .about-flex {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        .about-img {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 12px;
+            width: 100%;
+        }
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #0d1b2a;
+        }
+
+        /* Contact Section */
+        .contact-box {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            max-width: 750px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+        .form-control:focus {
+            border-color: #2563eb;
+        }
+        .btn-submit {
+            width: 100%;
+            background: #2563eb;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-submit:hover {
+            background: #1d4ed8;
+        }
+
+        /* Footer */
+        footer {
+            background: #0d1b2a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">Apex<span>Homes</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#listings">Listings</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact" class="btn-nav">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Find Your Dream Property in USA</h1>
+        <p>Explore luxury homes, modern apartments, and prime real estate across the United States.</p>
+    </section>
+
+    <!-- Featured Listings Section -->
+    <section class="section-container" id="listings">
+        <div class="section-title">
+            <h2>Featured Properties</h2>
+            <p>Explore top deals curated for you</p>
+        </div>
+        <div class="listings-grid">
+
+            <!-- Property 1 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" alt="Villa" class="card-img">
+                <div class="card-content">
+                    <div class="price">$1,250,000</div>
+                    <div class="card-title">Modern Luxury Villa</div>
+                    <div class="address"><i class="fa-solid fa-location-dot"></i> Beverly Hills, CA 90210</div>
+                    <div class="features">
+                        <span><i class="fa-solid fa-bed"></i> 4 Beds</span>
+                        <span><i class="fa-solid fa-bath"></i> 3 Baths</span>
+                        <span><i class="fa-solid fa-ruler-combined"></i> 3,500 sqft</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 2 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" alt="Apartment" class="card-img">
+                <div class="card-content">
+                    <div class="price">$850,000</div>
+                    <div class="card-title">Skyline View Penthouse</div>
+                    <div class="address"><i class="fa-solid fa-location-dot"></i> Downtown, Miami, FL 33131</div>
+                    <div class="features">
+                        <span><i class="fa-solid fa-bed"></i> 3 Beds</span>
+                        <span><i class="fa-solid fa-bath"></i> 2 Baths</span>
+                        <span><i class="fa-solid fa-ruler-combined"></i> 2,100 sqft</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 3 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="Home" class="card-img">
+                <div class="card-content">
+                    <div class="price">$620,000</div>
+                    <div class="card-title">Suburban Family Residence</div>
+                    <div class="address"><i class="fa-solid fa-location-dot"></i> Austin, TX 78701</div>
+                    <div class="features">
+                        <span><i class="fa-solid fa-bed"></i> 4 Beds</span>
+                        <span><i class="fa-solid fa-bath"></i> 3 Baths</span>
+                        <span><i class="fa-solid fa-ruler-combined"></i> 2,800 sqft</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section-container" id="about">
+        <div class="about-flex">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80" alt="Real Estate Agent" class="about-img">
+            <div class="about-text">
+                <h3>Trusted US Real Estate Experts</h3>
+                <p>We help buyers, sellers, and investors navigate the US real estate market seamlessly. With years of experience and deep market knowledge, we bring you the finest homes and properties nationwide.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="section-container" id="contact">
+        <div class="section-title">
+            <h2>Get in Touch with Us</h2>
+            <p>Interested in buying or selling? Send us a message below.</p>
+        </div>
+        <div class="contact-box">
+            <form action="https://api.web3forms.com/submit" method="POST">
+                
+                <!-- Web3Forms Access Key -->
+                <input type="hidden" name="access_key" value="eae6f773-c510-42fd-bf16-8b4b2516d2e0">
+
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="johndoe@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" name="phone" id="phone" class="form-control" placeholder="+1 (555) 000-0000" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message / Property Inquiry</label>
+                    <textarea name="message" id="message" rows="5" class="form-control" placeholder="Tell us what you are looking for..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Submit Inquiry</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Apex Homes Real Estate USA. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
